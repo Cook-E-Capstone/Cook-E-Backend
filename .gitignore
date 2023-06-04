@@ -38,7 +38,7 @@ Thumbs.db
 dist/**/*
 
 # ignore yarn.lock
-yarn.
+yarn.lock
 
 # igore package-lock
 package-lock

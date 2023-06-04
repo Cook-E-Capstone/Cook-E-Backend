@@ -1,8 +1,10 @@
 import express from 'express';
-import { postComunity } from '@src/controllers/controller.comunity';
-const router = express.Router();
+import { Request, Response, Router } from 'express';
+import { postComunity } from '../controllers/controller.community';
 import multer = require('multer');
 import os = require('os');
+
+const router = express.Router();
 
 router.post(
   '/comunity',
