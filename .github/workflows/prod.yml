@@ -22,7 +22,7 @@ jobs:
 
       # Build and tag the Docker image
       - name: Build Docker image
-        run: docker build -t ${{ env.REGISTRY }}:${{ github.sha }} .
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
 
   push:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
 
       # Push the Docker image to the registry
       - name: Push Docker image
-        run: docker push ${{ env.REGISTRY }}:${{ github.sha }}
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE_NAME }} \
-             --image ${{ env.REGISTRY }}:${{ github.sha }} \
+             --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
              --platform managed \
              --region ${{ env.REGION }} \
              --allow-unauthenticated \
