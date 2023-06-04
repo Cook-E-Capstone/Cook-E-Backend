@@ -1,5 +1,5 @@
 {
-  "name": "y",
+  "name": "cook-e",
   "version": "1.0.0",
   "description": "Healthy cooking made easy",
   "main": "index.js",
@@ -8,7 +8,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "migrate": "prisma migrate dev"
+    "start": "node dist/src/index.js",
+    "build": "yarn install --frozen-lockfile && yarn tsc",
+    "migrate": "npx prisma migrate"
   },
   "dependencies": {
     "@prisma/client": "^4.14.1",
