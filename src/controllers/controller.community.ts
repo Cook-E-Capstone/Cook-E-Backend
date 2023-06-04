@@ -1,11 +1,11 @@
 import { PrismaClient } from '@prisma/client';
-
+import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
-
 import path from 'path';
 
 type CommunityData = {
-  tittle: string;
+  id: string;
+  title: string;
   content: string;
   pathfile: string;
 };
@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 
 export const postComunity = async (req, res) => {
   try {
-    const { tittle, content } = req.body;
+    const { title, content } = req.body;
 
     // Validasi data
     //   if (!tittle || !content ) {
@@ -45,7 +45,8 @@ export const postComunity = async (req, res) => {
       console.log(target_path, 'target_path');
       src.on('end', async () => {
         const communityData: CommunityData = {
-          tittle,
+          id: uuidv4(),
+          title,
           content,
           pathfile: target_path
         };

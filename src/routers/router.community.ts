@@ -7,7 +7,7 @@ import os = require('os');
 const router = express.Router();
 
 router.post(
-  '/comunity',
+  '/community',
   multer({ dest: os.tmpdir() }).single('file'),
   postComunity
 );
