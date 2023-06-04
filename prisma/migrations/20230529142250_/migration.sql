@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Community" (
     "id" SERIAL NOT NULL,
-    "tittle" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "pathfile" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
