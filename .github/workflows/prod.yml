@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  REGISTRY: asia.gcr.io
+  REGISTRY: ${{ secrets.REGISTRY_URL }}
   IMAGE_NAME: cooke-prod
-  PROJECT_ID: cook-e-388208
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
   SERVICE_NAME: cooke-prod
   REGION: asia-southeast2
 
