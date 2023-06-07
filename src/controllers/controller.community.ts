@@ -45,7 +45,7 @@ export const postComunity = async (req, res) => {
       console.log(target_path, 'target_path');
       src.on('end', async () => {
         const communityData: CommunityData = {
-          id: uuidv4(),
+          id: uuidv4() as string,
           title,
           content,
           pathfile: target_path
