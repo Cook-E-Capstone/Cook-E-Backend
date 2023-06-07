@@ -4,17 +4,20 @@ FROM node:14
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the all of the application code to the working directory
+# Copy all of the application code to the working directory
 COPY . .
 
-# Install all the depedencies
+# Install all the dependencies
 RUN yarn install
 
-# Build the typescript code
+# Generate the Prisma Client
+RUN npx prisma generate
+
+# Build the TypeScript code
 RUN yarn build
 
 # Expose port 8080
 EXPOSE 8080
 
-# Set the command to run your application
-CMD ["yarn", "start"]
+# Start the application
+CMD [ "yarn", "start" ]
