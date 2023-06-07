@@ -20,6 +20,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Copy .env file
+        run: |
+          echo "${{ secrets.DATABASE_URL }}" > .env
+
       # Build and tag the Docker image
       - name: Build Docker image
         run: docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .

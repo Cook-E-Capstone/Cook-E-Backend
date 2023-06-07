@@ -13,9 +13,6 @@ RUN yarn install
 # Build the typescript code
 RUN yarn build
 
-# Copy the all of the application code to the working directory
-COPY . .
-
 # Expose port 8080
 EXPOSE 8080
 
