@@ -23,6 +23,7 @@ jobs:
       - name: Copy .env file
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
 
       # Build and tag the Docker image
       - name: Build Docker image
