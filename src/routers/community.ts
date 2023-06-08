@@ -1,6 +1,6 @@
 import express from 'express';
 import { Request, Response, Router } from 'express';
-import { postComunity } from '../controllers/controller.community';
+import { postComunity } from '../controllers/community';
 import multer = require('multer');
 import os = require('os');
 
