@@ -20,9 +20,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Copy Google Cloud Service Account credentials
+        run: |
+          echo "${{ secrets.GCP_SA_KEY }}" > gcp_service_account.json
+
       - name: Copy .env file
         run: |
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+          echo "${{ secrets.ENV_PROD }}" > .env
 
       # Build and tag the Docker image
       - name: Build Docker image
@@ -62,5 +66,4 @@ jobs:
              --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
              --platform managed \
              --region ${{ env.REGION }} \
-             --allow-unauthenticated \
-             --set-env-vars DATABASE_URL=${{ secrets.DATABASE_URL }}
+             --allow-unauthenticated

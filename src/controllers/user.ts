@@ -23,7 +23,7 @@ export const createUser = async (user: CreateUser): Promise<User> => {
 };
 
 export const loginUser = async (user: LoginUser): Promise<User> => {
-  const existingUser = await findUserByEmail(user.email);
+  const existingUser = await getUserByEmail(user.email);
 
   if (!existingUser) {
     return null;
@@ -41,7 +41,7 @@ export const loginUser = async (user: LoginUser): Promise<User> => {
   return existingUser;
 };
 
-export const findUserByEmail = async (email: string): Promise<User | null> => {
+export const getUserByEmail = async (email: string): Promise<User | null> => {
   const result = await prisma.user.findUnique({
     where: {
       email: email
@@ -51,7 +51,7 @@ export const findUserByEmail = async (email: string): Promise<User | null> => {
   return result;
 };
 
-export const findUserById = async (userID: string): Promise<User | null> => {
+export const getUserById = async (userID: string): Promise<User | null> => {
   const result = await prisma.user.findUnique({
     where: {
       id: userID

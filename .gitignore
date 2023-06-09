@@ -40,5 +40,8 @@ dist/**/*
 # ignore yarn.lock
 yarn.lock
 
-# igore package-lock
+# ignore package-lock
 package-lock
+
+# ignore gcp credentials
+gcp_service_account.json

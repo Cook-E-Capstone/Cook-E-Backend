@@ -4,9 +4,15 @@ import { checkSchema, validationResult } from 'express-validator';
 import { UserRegisterValidator, UserLoginValidator } from '../validators/user';
 import { ResponseTemplate } from '../types/response';
 import { CreateUser, LoginUser } from '../types/user';
-import { createUser, loginUser, findUserByEmail } from '../controllers/user';
-import { generateAuthToken } from '../middlewares/auth';
+import {
+  createUser,
+  loginUser,
+  getUserByEmail,
+  getUserById
+} from '../controllers/user';
+import { generateAuthToken, verifyAuth } from '../middlewares/auth';
 import { convertUserData } from '../utils/converters';
+import { RequestTemplate } from '../types/request';
 
 const userRouter = express.Router();
 
@@ -33,7 +39,7 @@ userRouter.post(
       password
     };
     try {
-      const existingUser = await findUserByEmail(userData.email);
+      const existingUser = await getUserByEmail(userData.email);
       if (existingUser) {
         response = {
           status: 400,
@@ -116,6 +122,45 @@ userRouter.post(
       };
       res.status(500).json(response);
     }
+  }
+);
+
+userRouter.get(
+  '/profile',
+  verifyAuth,
+  async (req: RequestTemplate, res: Response) => {
+    let response: ResponseTemplate;
+
+    const { user } = req;
+
+    try {
+      const userData = await getUserById(user.userID);
+
+      if (!userData) {
+        response = {
+          status: 401,
+          message: 'Unauthorized',
+          errors: 'User not found'
+        };
+        return res.status(401).json(response);
+      }
+
+      response = {
+        status: 200,
+        message: 'success',
+        data: { user: convertUserData(userData) }
+      };
+      res.status(200).json(response);
+    } catch (err) {
+      response = {
+        status: 500,
+        message: 'Internal server error',
+        errors: err.message
+      };
+      res.status(500).json(response);
+    }
+
+    return null;
   }
 );
 
