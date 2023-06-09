@@ -43,7 +43,7 @@ communityRouter.post(
     const { photo } = req.files;
     const { title, content } = req.body;
 
-    if (photo.length <= 0) {
+    if (!photo || photo.length <= 0) {
       response = {
         status: 400,
         message: 'Bad request',
