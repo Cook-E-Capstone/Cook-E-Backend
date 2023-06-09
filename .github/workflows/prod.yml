@@ -67,4 +67,4 @@ jobs:
              --platform managed \
              --region ${{ env.REGION }} \
              --allow-unauthenticated \
-             --set-env-vars DATABASE_URL=${{ secrets.DATABASE_URL }}, JWT_SECRET=${{ secrets.JWT_SECRET }}, PROJECT_ID=${{ secrets.PROJECT_ID }}
+             --update-env-vars DATABASE_URL=${{ secrets.DATABASE_URL }}, JWT_SECRET=${{ secrets.JWT_SECRET }}, PROJECT_ID=${{ secrets.PROJECT_ID }}
