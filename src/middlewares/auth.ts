@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
 import { ResponseTemplate } from '../types/response';
+import { RequestTemplate } from '../types/request';
 
 dotenv.config();
 const secretKey = process.env.SECRET_KEY || 'cookecookwithhealthy';
@@ -13,7 +14,11 @@ export const generateAuthToken = (userID: string): string => {
   return token;
 };
 
-export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
+export const verifyAuth = (
+  req: RequestTemplate,
+  res: Response,
+  next: NextFunction
+) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
   let response: ResponseTemplate;
   if (!token) {
@@ -27,7 +32,7 @@ export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const decoded = jwt.verify(token, secretKey);
-    //   req.user = decoded;
+    req.user = decoded;
     next();
   } catch (error) {
     response = {
