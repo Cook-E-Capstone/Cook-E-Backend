@@ -10,3 +10,40 @@ export const convertUserData = (user: User): UserData => {
   };
   return result;
 };
+
+export const translateIDtoEN = (word: string): string => {
+  const class_labels = {
+    alpukat: 'avocado',
+    anggur: 'grape',
+    apel: 'apple',
+    bayam: 'spinach',
+    brokoli: 'broccoli',
+    durian: 'durian',
+    jagung: 'corn',
+    jahe: 'ginger',
+    jambu: 'guava',
+    jeruk: 'orange',
+    'kembang kol': 'cauliflower',
+    kiwi: 'kiwi',
+    kol: 'cabbage',
+    lengkuas: 'galangal',
+    lobak: 'radish',
+    mangga: 'mango',
+    melon: 'melon',
+    mentimun: 'cucumber',
+    naga: 'dragon fruit',
+    nanas: 'pineapple',
+    paprika: 'bell pepper',
+    pisang: 'banana',
+    salak: 'snake fruit',
+    semangka: 'watermelon',
+    singkong: 'cassava',
+    stroberi: 'strawberry',
+    terong: 'eggplant',
+    tomat: 'tomato',
+    'ubi jalar': 'sweet potato',
+    wortel: 'carrot'
+  };
+  const translatedWord = class_labels[word];
+  return translatedWord ? translatedWord : '';
+};
