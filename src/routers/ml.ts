@@ -7,6 +7,7 @@ import { verifyAuth } from '../middlewares/auth';
 import { RequestTemplate } from '../types/request';
 import { ResponseTemplate } from '../types/response';
 import { ImageRecognitionRequest, ImageRecognitionResponse } from '../types/ml';
+import { translateIDtoEN } from '../utils/converters';
 import FormData from 'form-data';
 import axios from 'axios';
 
@@ -14,6 +15,7 @@ const mlRouter = express.Router();
 
 const ENDPOINT_URL = process.env.ML_URL || '';
 const KEY = 'cookiecookwithhealthy';
+const NINJAS_API_KEY = process.env.NINJAS_API_KEY || '';
 
 mlRouter.post(
   '/image',
@@ -64,9 +66,24 @@ mlRouter.post(
         data: form,
         headers: headers
       });
+      const indonesianName = mlResponse.data.result;
+      const englishName = translateIDtoEN(indonesianName);
+
+      const nutritionResponse = await axios({
+        method: 'get',
+        url: `https://api.api-ninjas.com/v1/nutrition?query=${englishName}`,
+        headers: {
+          'X-Api-Key': NINJAS_API_KEY
+        }
+      });
+
       const resData: ImageRecognitionResponse = {
         name: mlResponse.data.result,
-        confidence: parseFloat(mlResponse.data.confidence)
+        confidence: parseFloat(mlResponse.data.confidence),
+        nutrition: {
+          ...nutritionResponse.data[0],
+          name: indonesianName
+        }
       };
       const response = {
         status: 200,
