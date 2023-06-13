@@ -30,6 +30,7 @@ export const uploadFileToStorage = async (
     });
 
     stream.on('error', (error) => {
+      console.log(error);
       reject(error);
     });
 
