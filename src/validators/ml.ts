@@ -5,3 +5,15 @@ export const MachineLearningImageValidator: Schema = {
     in: ['body']
   }
 };
+
+export const MachineLearningRecipeValidator: Schema = {
+  query: {
+    in: ['query'],
+    isString: true
+  },
+  limit: {
+    in: ['query'],
+    isNumeric: true,
+    optional: true
+  }
+};
