@@ -5,11 +5,11 @@ import { File } from 'multer';
 dotenv.config();
 const projectId = process.env.PROJECT_ID || '';
 const gcpBucketName = 'cooke_storage';
-const serviceAccount = 'gcp_service_account.json';
+const serviceAccount = process.env.GCP_SA_KEY || '';
 
 const storage = new Storage({
   projectId: projectId,
-  keyFilename: serviceAccount
+  credentials: JSON.parse(serviceAccount)
 });
 
 export const uploadFileToStorage = async (
