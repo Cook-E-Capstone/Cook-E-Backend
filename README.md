@@ -36,10 +36,14 @@ yarn
 
 ### Non docker
 
-1. Create environment variables
+1. Create environment variables in file .env
 
 ```
-Create `.env` file containing required environment variables
+DATABASE_URL=
+JWT_SECRET=
+PROJECT_ID=
+ML_URL=
+GCP_SA_KEY=
 ```
 
 2. Run app in development environment
