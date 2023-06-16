@@ -12,7 +12,7 @@ datasource db {
 model Community {
   id         String   @id @default(cuid())
   title      String
-  content    String
+  content    String   @db.Text
   pathfile   String
   userID     String
   user       User     @relation(fields: [userID], references: [id])
