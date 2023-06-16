@@ -21,6 +21,7 @@ git clone "https://github.com/Cook-E-Capstone/Cook-E-Backend.git"
 ```
 
 2. Install dependencies
+
 npm
 ```
 npm i
