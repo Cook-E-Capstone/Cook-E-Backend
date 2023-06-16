@@ -63,10 +63,11 @@ communityRouter.post(
         userID: user.userID
       };
       const newCommunity = await createCommunity(communityData);
+
       response = {
         status: 200,
         message: 'success',
-        data: { community: newCommunity }
+        data: { ...newCommunity, user: convertUserData(newCommunity.user) }
       };
       res.status(200).json(response);
     } catch (err) {
