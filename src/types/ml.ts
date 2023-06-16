@@ -7,3 +7,8 @@ export interface ImageRecognitionResponse {
   confidence: number;
   nutrition: any;
 }
+
+export interface RecipeRecommendationResponse {
+  query: string;
+  results: any[];
+}
